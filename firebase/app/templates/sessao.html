@@ -1,0 +1,61 @@
+ <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <title>Sistema Solar</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+    <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js"></script>
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-database.js"></script>
+        
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+</head>
+<body>
+
+<h1>Trabalhando na sessão {{mac}}</h1>
+
+<!--video width="400" controls autoplay>
+  <source  id="id_video" src="sistemasolar.mp4"  type="video/mp4">
+  Your browser does not support HTML video.
+</video-->
+
+<img id="fig" src="/static/sistema-solar.jpg" style="width: 800px"/>
+<audio id="id_audio" autoplay preload="metadata" style=" width:300px;">
+	<source id="som" src="" type="audio/mpeg">
+	Your browser does not support the audio element.
+</audio>
+
+<script>
+//console.log(ref.child('sessao').child('{{mac}}').key);
+let image = document.getElementById("fig");
+let audio = document.getElementById("id_audio");
+let som = document.getElementById("som");
+
+ref.child('sessao').child('{{mac}}').child('acao').on('value',
+    function(dataSnapshot) {
+        let recurso = dataSnapshot.val();
+        //console.log(recurso);
+        ref.child('recurso').child(recurso).child('audio').get().then(
+            function(snapshot){
+                console.log(snapshot.val());
+                play(snapshot.val());
+                //som.src = snapshot.val();
+                //audio.play();
+            }
+        );
+        ref.child('recurso').child(recurso).child('img').get().then(
+            function(snapshot){
+                console.log(snapshot.val());
+                image.src = snapshot.val();
+            }
+        );
+    }
+);
+
+</script>
+
+</body>
+</html> 

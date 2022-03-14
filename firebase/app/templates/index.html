@@ -1,0 +1,29 @@
+ <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <title>Sistema Solar</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+    <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js"></script>
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-database.js"></script>
+        
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+</head>
+<body>
+
+<h1>Sistema Solar</h1>
+<button id="ler_sessoes">Sessões</button>
+<ul id="sessoes_ul">
+</ul>
+<script>
+    let ss = document.getElementById('ler_sessoes');
+    ss.onclick = get_sessoes;    
+    get_sessoes();
+</script>
+
+</body>
+</html> 
